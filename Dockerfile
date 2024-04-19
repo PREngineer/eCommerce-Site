@@ -50,12 +50,5 @@ EXPOSE 80
 ADD entrypoint.sh /
 RUN ["chmod", "+x", "/entrypoint.sh"]
 
-# Run as user allowed in NAS
-ARG UNAME=jorge.l.pabon.cruz
-ARG UID=1026
-ARG GID=100
-RUN addgroup -S appgroup && adduser -S -G appgroup -u $UID -g $GID -s /bin/bash $UNAME
-USER $UNAME
-
 # Execute the entrypoint script
 ENTRYPOINT ["/entrypoint.sh"]
