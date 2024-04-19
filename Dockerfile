@@ -35,13 +35,6 @@ RUN apk --no-cache --update \
     tzdata \
     && mkdir /app
 
-# Run as user allowed in NAS
-ARG UNAME=jorge.l.pabon.cruz
-ARG UID=1026
-ARG GID=100
-RUN addgroup -S appgroup && adduser -S -G appgroup -u $UID -g $GID -s /bin/bash $UNAME
-USER $UNAME
-
 # Copy our application to the /app directory
 COPY ./App /app
 RUN chmod -R 777 /app
@@ -56,6 +49,13 @@ EXPOSE 80
 # Add the entrypoint script
 ADD entrypoint.sh /
 RUN ["chmod", "+x", "/entrypoint.sh"]
+
+# Run as user allowed in NAS
+ARG UNAME=jorge.l.pabon.cruz
+ARG UID=1026
+ARG GID=100
+RUN addgroup -S appgroup && adduser -S -G appgroup -u $UID -g $GID -s /bin/bash $UNAME
+USER $UNAME
 
 # Execute the entrypoint script
 ENTRYPOINT ["/entrypoint.sh"]
