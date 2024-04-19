@@ -1,0 +1,14 @@
+# Create the Exposed App Service
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: ecommerce-site
+  namespace: production
+spec:
+  selector:
+    app: ecommerce-site
+  ports:
+  - name: http
+    port: 80
+    targetPort: 80

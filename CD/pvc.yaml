@@ -1,0 +1,17 @@
+# Create a Persistent Volume Claim
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: ecommerce-site-pv-claim
+  namespace: production
+spec:
+  storageClassName: ""
+  # Name of the volume to tie to this claim
+  volumeName: ecommerce-site-pv
+  accessModes:
+  - ReadWriteMany
+  volumeMode: Filesystem  
+  resources:
+    requests:
+      storage: 1Gi
