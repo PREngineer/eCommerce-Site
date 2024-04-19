@@ -1,13 +1,6 @@
 # Base Image is latest Alpine
 FROM alpine:3.15
 
-# Run as user allowed in NAS
-ARG UNAME=jorge.l.pabon.cruz
-ARG UID=1026
-ARG GID=100
-RUN addgroup -S appgroup && adduser -S -G appgroup -u $UID -g $GID -s /bin/bash $UNAME
-USER $UNAME
-
 # Maintainer information and description
 LABEL maintainer="Jorge Pabón <pianistapr@hotmail.com>" description="An eCommerce Platform for small businesses."
 
@@ -41,6 +34,13 @@ RUN apk --no-cache --update \
     php7-xml \
     tzdata \
     && mkdir /app
+
+# Run as user allowed in NAS
+ARG UNAME=jorge.l.pabon.cruz
+ARG UID=1026
+ARG GID=100
+RUN addgroup -S appgroup && adduser -S -G appgroup -u $UID -g $GID -s /bin/bash $UNAME
+USER $UNAME
 
 # Copy our application to the /app directory
 COPY ./App /app
