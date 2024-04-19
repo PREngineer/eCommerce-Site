@@ -47,13 +47,14 @@ class Database
     {
       $dsn = '';
       
+      // Establish a connection to the database specified in settings
       if($this->type == 'mysql')
       {
         $dsn = 'mysql:host=' . $this->host . ';port=' . $this->port . ';dbname=' . $this->name . ';charset=utf8';
       }
       elseif($this->type == 'sqlsrv')
       {
-        $dsn = 'sqlsrv:Server=' . $this->host . ',' . $this->port . ';Database=testdb';
+        $dsn = 'sqlsrv:Server=' . $this->host . ',' . $this->port . ';Database=' . $this->name;
       }
       
       try
@@ -96,11 +97,18 @@ class Database
     if( strpos( $query, 'SELECT ' ) !== False )
     {
       // Return the associative arrays of data
-      $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+      $data = $stmt->fetchAll( PDO::FETCH_ASSOC );
     }
 
+    // If running an UPDATE statement
+    if( strpos( $query, 'UPDATE ' ) !== False )
+    {
+      // No need to return anything
+      // $data already returns if the query was successful or not (true|false)
+    }
+    
     // If running a DELETE or UPDATE statement
-    if( strpos( $query, 'DELETE ' ) !== False || strpos( $query, 'UPDATE ' ) !== False )
+    if( strpos( $query, 'DELETE ' ) !== False )
     {
       // Return the amount of rows affected
       $data = $stmt->rowCount();
