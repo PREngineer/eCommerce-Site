@@ -392,7 +392,7 @@ class AdministrationNewService extends Page
                     <h5>Pick An Existing Image</h5>';
 
     // Grab a list of all images in the path given
-    $images = glob( 'images/services/*.{jpg,jpeg,png,gif}', GLOB_BRACE );
+    $images = glob( '/app/images/services/*.{jpg,jpeg,png,gif}', GLOB_BRACE );
     
     foreach( $images as $image ){
       // Display or process each image as needed
