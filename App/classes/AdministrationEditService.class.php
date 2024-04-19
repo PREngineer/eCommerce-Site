@@ -429,8 +429,8 @@ class AdministrationEditService extends Page
                     <label>${name} <span class="text-danger">*</span></label>
                     <h5>Pick An Existing Image</h5>';
 
-    // Grab a list of all images in the path given
-    $images = glob( 'images/services/*.{jpg,jpeg,png,gif}', GLOB_BRACE );
+    // Grab a list of all images in the path given (Only .jpg | .jpeg | .png | .gif allowed)
+    $images = array_merge( glob( 'images/services/*.jpg' ), glob( 'images/services/*.png' ), glob( 'images/services/*.jpeg' ), glob( 'images/services/*.gif' ) );
     
     foreach( $images as $image ){
       // Display or process each image as needed

@@ -229,8 +229,8 @@ class AdministrationEditHomeBanner extends Page
                     <label>Image <span class="text-danger">*</span></label>
                     <h5>Pick An Existing Image</h5>';
 
-    // Grab a list of all images in the path given
-    $images = glob( 'images/home-slider/*.{jpg,jpeg,png,gif}', GLOB_BRACE );
+    // Grab a list of all images in the path given (Only .jpg | .jpeg | .png | .gif allowed)
+    $images = array_merge( glob( 'images/home-slider/*.jpg' ), glob( 'images/home-slider/*.png' ), glob( 'images/home-slider/*.jpeg' ), glob( 'images/home-slider/*.gif' ) );
     
     foreach( $images as $image ){
       // Display or process each image as needed
