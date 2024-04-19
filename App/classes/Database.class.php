@@ -22,9 +22,9 @@ class Database
    */
   public function __construct()
   {
-    if( file_exists('settings.php') )
+    if( file_exists('/config/settings.php') )
     {
-      require_once 'settings.php';
+      require_once '/config/settings.php';
       
       $this->type = $DBTYPE;
       $this->name = $DBNAME;
