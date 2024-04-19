@@ -1,6 +1,14 @@
 # Base Image is latest Alpine
 FROM alpine:3.15
 
+# Run as user allowed in NAS
+ARG UNAME=jorge.l.pabon.cruz
+ARG UID=1026
+ARG GID=100
+RUN groupadd -g $GID -o $UNAME
+RUN useradd -m -u $UID -g $GID -o -s /bin/bash $UNAME
+USER $UNAME
+
 # Maintainer information and description
 LABEL maintainer="Jorge Pabón <pianistapr@hotmail.com>" description="An eCommerce Platform for small businesses."
 
