@@ -44,7 +44,7 @@ RUN mkdir /config
 RUN chmod -R 777 /config
 
 # Expose our web ports
-EXPOSE 80 443
+EXPOSE 80
 
 # Add the entrypoint script
 ADD entrypoint.sh /

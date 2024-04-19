@@ -46,7 +46,7 @@ spec:
     - nfsvers=4.1
   nfs:
     # The path in the NAS
-    path: "/volume1/Kubernetes/Meet Spa/images"
+    path: "/volume1/Kubernetes/Meet Spa Images"
     # The NAS IP
     server: 10.0.0.58
     # Make sure to allow to write
