@@ -3,12 +3,32 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: ecommerce-site-pv-claim
+  name: ecommerce-site-pv-claim1
   namespace: production
 spec:
   storageClassName: ""
   # Name of the volume to tie to this claim
-  volumeName: ecommerce-site-pv
+  volumeName: ecommerce-site-pv1
+  accessModes:
+  - ReadWriteMany
+  volumeMode: Filesystem  
+  resources:
+    requests:
+      storage: 1Gi
+
+---
+
+# Create a Persistent Volume Claim
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: ecommerce-site-pv-claim2
+  namespace: production
+spec:
+  storageClassName: ""
+  # Name of the volume to tie to this claim
+  volumeName: ecommerce-site-pv2
   accessModes:
   - ReadWriteMany
   volumeMode: Filesystem  

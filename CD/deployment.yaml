@@ -1,0 +1,59 @@
+# Create the App Deployment
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ecommerce-site-deployment
+  namespace: production
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ecommerce-site
+  template:
+    metadata:
+      labels:
+        app: ecommerce-site
+    spec:
+    # Specify the container
+      containers:
+        - name: ecommerce-site
+          image: prengineer/ecommerce-site:latest
+          env:
+            # Specify the Time Zone
+            - name: TZ
+              value: America/New_York
+            # The credentials for GitHub
+            - name: GIT_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: github-creds
+                  key: username
+            - name: GIT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: github-creds
+                  key: password
+          resources:
+            limits:
+              memory: "500Mi"
+              cpu: "1000m"
+          ports:
+            - name: http
+              containerPort: 80
+          # Add the volumes
+          volumeMounts:
+          # Config
+          - mountPath: "/config"
+            name: ecommerce-site-pv-storage1
+          # Images
+          - mountPath: "/app/images"
+            name: ecommerce-site-pv-storage2
+      # Specify the volumes
+      volumes:
+      - name: ecommerce-site-pv-storage1
+        persistentVolumeClaim:
+          claimName: ecommerce-site-pv-claim1
+      - name: ecommerce-site-pv-storage2
+        persistentVolumeClaim:
+          claimName: ecommerce-site-pv-claim2
