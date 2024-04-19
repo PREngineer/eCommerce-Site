@@ -263,7 +263,9 @@ class AdministrationEditBusinessLocation extends Page
                     <h5>Pick An Existing Image</h5>';
 
     // Grab a list of all images in the path given
-    $images = glob( 'images/locations/*.{jpg,jpeg,png,gif}', GLOB_BRACE );
+    $extensions = ['jpg', 'jpeg', 'png', 'gif'];
+    $pattern = 'images/locations/*.' . implode( '|', $extensions );
+    $images = glob( $pattern );
     
     foreach( $images as $image ){
       // Display or process each image as needed
