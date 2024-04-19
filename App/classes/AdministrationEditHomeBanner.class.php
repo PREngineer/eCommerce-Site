@@ -230,7 +230,7 @@ class AdministrationEditHomeBanner extends Page
                     <h5>Pick An Existing Image</h5>';
 
     // Grab a list of all images in the path given
-    $images = glob( '/app/images/home-slider/*.{jpg,jpeg,png,gif}', GLOB_BRACE );
+    $images = glob( 'images/home-slider/*.{jpg,jpeg,png,gif}', GLOB_BRACE );
     
     foreach( $images as $image ){
       // Display or process each image as needed
