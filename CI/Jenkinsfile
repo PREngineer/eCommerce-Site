@@ -11,6 +11,18 @@ spec:
   containers:
   - name: kaniko
     image: gcr.io/kaniko-project/executor:debug
+    # Add environment variables for GitHub credentials
+    env:
+      - name: GIT_USERNAME
+        valueFrom:
+          secretKeyRef:
+            name: github-creds
+            key: username
+      - name: GIT_PASSWORD
+        valueFrom:
+          secretKeyRef:
+            name: github-creds
+            key: password
     command:
     - sleep
     args:

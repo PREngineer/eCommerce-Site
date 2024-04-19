@@ -23,17 +23,6 @@ spec:
             # Specify the Time Zone
             - name: TZ
               value: America/New_York
-            # The credentials for GitHub
-            - name: GIT_USERNAME
-              valueFrom:
-                secretKeyRef:
-                  name: github-creds
-                  key: username
-            - name: GIT_PASSWORD
-              valueFrom:
-                secretKeyRef:
-                  name: github-creds
-                  key: password
           resources:
             limits:
               memory: "500Mi"
