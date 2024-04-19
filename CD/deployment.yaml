@@ -15,11 +15,6 @@ spec:
       labels:
         app: ecommerce-site
     spec:
-    # User my NAS user so that it can write to NFS share
-      securityContext:
-        runAsUser: 1026
-        runAsGroup: 100
-        fsGroup: 100
     # Specify the container
       containers:
         - name: ecommerce-site
