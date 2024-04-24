@@ -15,8 +15,8 @@ metadata:
   labels:
     app: ecommerce-site
   name: ecommerce-site
-  # Deploy to production namespace
-  namespace: production
+  # Deploy to meetspa namespace
+  namespace: meetspa
 spec:
   rules:
   # Change to your domain
