@@ -29,7 +29,17 @@ spec:
             port: 
               number: 80
         path: /
-        pathType: Prefix  
+        pathType: Prefix
+  - host: www.meetspa.co
+    http:
+      paths:
+      - backend:
+          service:
+            name: ecommerce-site
+            port: 
+              number: 80
+        path: /
+        pathType: Prefix
   tls:
   - hosts:
     # Change to your domain
