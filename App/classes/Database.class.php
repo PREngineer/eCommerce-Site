@@ -119,6 +119,26 @@ class Database
     return $data;
   }
 
+  /**
+   * This function escapes special characters that are a problem due to SQL injection
+   */
+  public function sanitize( $string )
+  {
+    $string = str_replace("'", "&apos;", $string);
+    $string = str_replace('"', '&quot;', $string);
+    // $string = str_replace("(", '&#40;', $string);
+    // $string = str_replace(")", '&#41;', $string);
+    $string = str_replace('<', '&lt;', $string);
+    $string = str_replace('>', '&gt;', $string);
+    $string = str_replace('&', '&amp;', $string);
+    $string = str_replace("%", "&#37;", $string);
+    $string = str_replace('\\', '\\\\', $string);
+    $string = str_replace("\0", '', $string);
+    $string = str_replace("\t", '&#09;', $string);
+    $string = str_replace("\Z", '', $string);
+    return $string;
+  }
+
 }
 
 ?>

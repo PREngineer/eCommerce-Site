@@ -73,10 +73,21 @@ class AdministrationEditService extends Page
   public function updateService( $id )
   {
     // Collapse addons array
-    $addons = implode(',', $_POST['addons']);
+    $addons;
+    if( isset( $_POST['addons'] ) ){
+      $addons = implode(',', $_POST['addons']);
+    }
+    else{
+      $addons = '';
+    }
 
     // Collapse locations array
-    $locations = implode(',', $_POST['locations']);
+    if( isset( $_POST['locations'] ) ){
+      $locations = implode(',', $_POST['locations']);
+    }
+    else{
+      $locations = '';
+    }
 
     // Pick the image URIs
     $imageOne;
@@ -87,24 +98,23 @@ class AdministrationEditService extends Page
     if( isset( $_POST['image_three'] ) ){ $imageThree = $_POST['image_three']; } else { $imageThree = '/images/services/' . $_FILES['image_three']['name']; }
     // Update service
     $result = $this->db->query_DB( "UPDATE services 
-                                    SET category                = '" . $_POST['category'] . "',
-                                        name                    = '" . $_POST['name'] . "', 
-                                        price                   = '" . $_POST['price'] . "', 
-                                        steps                   = '" . $_POST['steps'] . "', 
-                                        addons                  = '" . $addons . "', 
-                                        duration                = '" . $_POST['duration'] . "', 
-                                        locations               = '" . $locations . "', 
-                                        description             = '" . $_POST['description'] . "', 
-                                        image_one               = '" . $imageOne . "', 
-                                        image_one_description   = '" . $_POST['image_one_description'] . "', 
-                                        image_two               = '" . $imageTwo . "', 
-                                        image_two_description   = '" . $_POST['image_two_description'] . "', 
-                                        image_three             = '" . $imageThree . "', 
-                                        image_three_description = '" . $_POST['image_three_description'] . "'
+                                    SET category                = '" . $this->db->sanitize( $_POST['category'] ) . "',
+                                        name                    = '" . $this->db->sanitize( $_POST['name'] ) . "', 
+                                        price                   = '" . $this->db->sanitize( $_POST['price'] ) . "', 
+                                        steps                   = '" . $this->db->sanitize( $_POST['steps'] ) . "', 
+                                        addons                  = '" . $this->db->sanitize( $addons ) . "', 
+                                        duration                = '" . $this->db->sanitize( $_POST['duration'] ) . "', 
+                                        locations               = '" . $this->db->sanitize( $locations ) . "', 
+                                        description             = '" . $this->db->sanitize( $_POST['description'] ) . "', 
+                                        image_one               = '" . $this->db->sanitize( $imageOne ) . "', 
+                                        image_one_description   = '" . $this->db->sanitize( $_POST['image_one_description'] ) . "', 
+                                        image_two               = '" . $this->db->sanitize( $imageTwo ) . "', 
+                                        image_two_description   = '" . $this->db->sanitize( $_POST['image_two_description'] ) . "', 
+                                        image_three             = '" . $this->db->sanitize( $imageThree ) . "', 
+                                        image_three_description = '" . $this->db->sanitize( $_POST['image_three_description'] ) . "'
                                     WHERE id     = '" . $id . "'" );
-    if( !$result ){ return false; }
-    
-    return true;
+        
+    return $result;
   }
 
   /**
@@ -185,7 +195,7 @@ class AdministrationEditService extends Page
       <div class="row">
       ';
 
-    // Handle updates to branding
+    // Handle updates to service
     if( isset( $_POST['name'] ) ){
       // If images handled properly
       if( $this->uploadImages() ){

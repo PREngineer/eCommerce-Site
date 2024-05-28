@@ -29,7 +29,7 @@ class AdministrationNewServiceAddon extends Page
   public function createServiceAddon()
   {
     // Insert service addon
-    $result = $this->db->query_DB( "INSERT INTO service_addons ( category, name, price ) VALUES ( '" . $_POST['name'] . "', '" . $_POST['category'] . "', '" . $_POST['price'] . "' )" );
+    $result = $this->db->query_DB( "INSERT INTO service_addons ( name, category, price ) VALUES ( '" . $_POST['name'] . "', '" . $_POST['category'] . "', '" . $_POST['price'] . "' )" );
     
     return true;
   }

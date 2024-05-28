@@ -34,4 +34,5 @@ spec:
   - hosts:
     # Change to your domain
     - meetspa.co
+    - www.meetspa.co
     secretName: ecommerce-site-tls
