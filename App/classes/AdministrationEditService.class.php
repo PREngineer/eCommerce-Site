@@ -255,7 +255,7 @@ class AdministrationEditService extends Page
                   <option value=""></option>';
 
     $categories = $this->getCategories();
-    foreach( $categories as &$category ){
+    foreach( $categories as $category ){
       $this->content .= '
                   <option value="' . $category['id'] . '"';
                   
@@ -301,12 +301,14 @@ class AdministrationEditService extends Page
                 <div data-toggle="buttons">';
 
     $addons = $this->getAddons();
-    foreach ($addons as &$addon) {
+    foreach( $addons as $addon ){
               $this->content .= '
                   <label class="btn btn-secondary">
                     <input type="checkbox" name="addons[]" autocomplete="off" value="' . $addon['id'] . '"';
-                    
-      if( strpos($service['addons'], $addon['id']) !== false ){
+      
+      // If the addon is in the list of addons
+      $serviceAddons = explode( ",", $service['addons'] );
+      if( in_array( $addon['id'], $serviceAddons ) ){
         $this->content .= ' checked';
       }
 
@@ -324,7 +326,7 @@ class AdministrationEditService extends Page
                 <div data-toggle="buttons">';
 
     $locations = $this->getLocations();
-    foreach ($locations as &$location) {
+    foreach ($locations as $location) {
               $this->content .= '
                   <label class="btn btn-secondary">
                     <input type="checkbox" name="locations[]" autocomplete="off" value="' . $location['id'] . '"';
